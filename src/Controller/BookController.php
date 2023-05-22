@@ -23,19 +23,16 @@ class BookController extends AbstractController
     #[Route('s', name: 'index', methods: ["HEAD","GET"])] // site.com/books
     public function index(BookRepository $bookRepository): Response
     {
-        // TODO: Make a pagination
-        // Requete DQL de récup de la liste des livres en BDD
+        
         $books = $bookRepository->findAll();
 
-        // Rendu de la page dédiée à l'affichage de la liste des livres
-        // en passant la variable $books contenant la liste des livres de la BDD
+        
         return $this->render('pages/book/index.html.twig', [
             'books' => $books
         ]);
     }
 
     /**
-     * Méthode dédiée à l'affichage et au traitement du formulaire de création d'un livre
      *
      * @param Request $request
      * @param BookRepository $bookRepository
@@ -44,18 +41,14 @@ class BookController extends AbstractController
     #[Route('', name: 'create', methods: ["HEAD","GET","POST"])] // site.com/book
     public function create(Request $request, BookRepository $bookRepository): Response
     {
-        // Check if user is granted
-        // ...
+      
 
-        // Create the new Book object
+        
         $book = new Book;
 
-        // Build the form
-        // Creation du formulaire basé sur l'architecture BookType
-        // ET sur l'objet $book
         $form = $this->createForm(BookType::class, $book);
 
-        // Handle the request
+       
         $form->handleRequest($request);
 
         // Form treatment + form validator + saving data
