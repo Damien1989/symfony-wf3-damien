@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{# Page settings #}
+{% set page_title = "Book: " ~ book.title  %}
+
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
+{% block body %}
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    <div><strong>Title : </strong> {{ book.title }}</div>
+    <div><strong>Description : </strong> {{ book.description }}</div>
+    <div><strong>Cover : </strong> {{ book.cover }}</div>
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('book:index') }}" class="btn btn-primary btn-sm">Back to books list</a>
+    <a href="{{ url('book:update', {id: book.id}) }}" class="btn btn-warning btn-sm">Edit this book</a>
+</footer>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{# Page settings #}
+{% set page_title = "All our books" %}
+
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
+{% block body %}
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    <ul>
+    {% for book in books %}
+        <li>
+            <a href="{{ url('book:read', {id: book.id}) }}">{{ book.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('book:create') }}" class="btn btn-primary btn-sm">Add a new book</a>
+</footer>
+{% endblock %}
