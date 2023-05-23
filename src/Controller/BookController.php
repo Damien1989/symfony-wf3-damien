@@ -41,9 +41,6 @@ class BookController extends AbstractController
     #[Route('', name: 'create', methods: ["HEAD","GET","POST"])] // site.com/book
     public function create(Request $request, BookRepository $bookRepository): Response
     {
-      
-
-        
         $book = new Book;
 
         $form = $this->createForm(BookType::class, $book);
@@ -83,9 +80,28 @@ class BookController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'update', methods: ["HEAD","GET","POST"])] 
-    public function update(): Response
+    public function update(Request $request, BookRepository $bookRepository, Book $book): Response
     {
+        $form = $this->createForm(BookType::class, $book);
+
+       
+        $form->handleRequest($request);
+
+        // Form treatment + form validator + saving data
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $bookRepository->save($book, true);
+
+            return $this->redirectToRoute('book:update', [
+                'id' => $book->getId()
+            ]);
+        }
+
+        // Create the form view
+        $form = $form->createView();
+
         return $this->render('pages/book/update.html.twig', [
+            'form' => $form
         ]);
     }
 
