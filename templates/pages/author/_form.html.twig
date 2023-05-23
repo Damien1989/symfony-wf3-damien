@@ -1,0 +1,31 @@
+{{ form_start(form, {
+    'attr': {
+        'novalidate': "novalidate"
+    }
+}) }}
+
+{# CSRF token #}
+{{ form_widget(form._token) }}
+
+{# Firstname #}
+<div class="form-group">
+    {{ form_label(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+    {{ form_help(form.firstname) }}
+    {{ form_errors(form.firstname) }}
+</div>
+
+{# Lastname #}
+<div class="form-group">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_help(form.name) }}
+    {{ form_errors(form.name) }}
+</div>
+
+<button class="btn btn-sm btn-secondary" type="reset">Cancel</button>
+<button class="btn btn-sm btn-primary" type="submit">{{ btn_label | default("Create the new author") }}</button>
+
+{{ form_end(form, {
+    'render_rest': false
+    }) }}

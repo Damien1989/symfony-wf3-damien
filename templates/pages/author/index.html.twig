@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{# Page settings #}
+{% set page_title = "All our authors" %}
+
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
+{% block body %}
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    <ul>
+    {% for author in authors %}
+        <li>
+            {% set author_fullname = author.firstname ~ " " ~ author.name %}
+            <a href="{{ url('author:read', {id: author.id}) }}">{{ author_fullname }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('author:create') }}" class="btn btn-primary btn-sm">Add a new author</a>
+</footer>
+{% endblock %}

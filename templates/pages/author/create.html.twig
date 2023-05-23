@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{# Page settings #}
+{% set page_title = "Add a new author" %}
+
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
+{% block body %}
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            {% include "pages/author/_form.html.twig" with {
+                form: form
+            } only %}
+
+        </div>
+    </div>
+
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('author:index') }}" class="btn btn-link btn-sm">Back to authors list</a>
+</footer>
+
+{% endblock %}

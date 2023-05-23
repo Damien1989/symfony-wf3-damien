@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{# Page settings #}
+{% set author_fullname = author.firstname ~ " " ~ author.name %}
+{% set page_title = "author: " ~ author_fullname  %}
+
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
+{% block body %}
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            {% include "pages/author/_form.html.twig" with {
+                form: form,
+                btn_label: "Update the author"
+            } only %}
+
+        </div>
+    </div>
+
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('author:index') }}" class="btn btn-link btn-sm">Back to authors list</a>
+    <a href="{{ url('author:read', {id: author.id}) }}" class="btn btn-link btn-sm">Back to author details</a>
+</footer>
+{% endblock %}

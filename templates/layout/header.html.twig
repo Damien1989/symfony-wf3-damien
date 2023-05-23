@@ -34,6 +34,12 @@
                             label: 'Books'
                         } %}
                     </li>
+                     <li class="nav-item">
+                        {% include "components/nav-link/index.html.twig" with {
+                            route: 'author:index',
+                            label: 'Authors'
+                        } %}
+                    </li>
                 </ul>
 
                 {# Search bar #}
